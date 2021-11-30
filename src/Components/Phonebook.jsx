@@ -1,11 +1,11 @@
-// import styles from "./css/Phonebook.module.css"
-import { nanoid } from "nanoid"
-import React, { Component } from "react"
+import styles from "./css/Phonebook.module.css"
 import ContactsFilter from "./ContactsFilter"
 import ContactForm from "./ContactForm"
 import Contacts from "./Contacts"
+import { nanoid } from "nanoid"
+import React from "react"
 
-export class Phonebook extends Component {
+export class Phonebook extends React.Component {
   state = {
     contacts: [
       { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -57,17 +57,17 @@ export class Phonebook extends Component {
 
   render() {
     return (
-      <>
-        <h1>Phonebook</h1>
+      <section className={styles.container}>
+        <h1 className={styles.title} >Phonebook</h1>
         <ContactForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
 
-        <h2>Contacts</h2>
+        <h2 className={styles.title} style={{marginBottom: 0}}>Contacts</h2>
         <ContactsFilter handleFilterChange={this.handleFilterChange} />
         <Contacts {...this.state} deleteContact={this.deleteContact} />
-      </>
+      </section>
     )
   }
 }
