@@ -1,7 +1,7 @@
-import styles from "./css/Phonebook.module.css"
-import ContactsFilter from "./ContactsFilter"
-import ContactForm from "./ContactForm"
-import Contacts from "./Contacts"
+import ContactsFilter from "./ContactsFilter/ContactsFilter"
+import ContactForm from "./ContactForm/ContactForm"
+import Contacts from "./Contacts/Contacts"
+import styles from "./Phonebook.module.css"
 import { nanoid } from "nanoid"
 import React from "react"
 
@@ -22,7 +22,7 @@ export class Phonebook extends React.Component {
   ifNameInContacts = (inputName) =>
     !this.state.contacts.every(({ name }) => name !== inputName)
 
-  handleChange = (event) => {
+  updateNameOrNumber = (event) => {
     if (this.ifNameInContacts(event.target.value)) {
       alert(`${event.target.value} is alredy in contacts.`)
     }
@@ -33,7 +33,7 @@ export class Phonebook extends React.Component {
     )
   }
 
-  handleSubmit = (event) => {
+  saveNewContact = (event) => {
     event.preventDefault()
 
     this.setState(({ name, number, contacts }) => {
@@ -58,13 +58,15 @@ export class Phonebook extends React.Component {
   render() {
     return (
       <section className={styles.container}>
-        <h1 className={styles.title} >Phonebook</h1>
+        <h1 className={styles.title}>Phonebook</h1>
         <ContactForm
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
+          saveNewContact={this.saveNewContact}
+          updateNameOrNumber={this.updateNameOrNumber}
         />
 
-        <h2 className={styles.title} style={{marginBottom: 0}}>Contacts</h2>
+        <h2 className={styles.title} style={{ marginBottom: 0 }}>
+          Contacts
+        </h2>
         <ContactsFilter handleFilterChange={this.handleFilterChange} />
         <Contacts {...this.state} deleteContact={this.deleteContact} />
       </section>
