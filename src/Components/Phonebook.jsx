@@ -6,6 +6,7 @@ import { nanoid } from "nanoid"
 import React from "react"
 
 export class Phonebook extends React.Component {
+  
   state = {
     contacts: [
       { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
